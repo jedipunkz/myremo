@@ -53,7 +53,7 @@ func (r *Remo) GetSignal(ss []*natureremo.Signal, name string) error {
 // SendSignal is function to send signal to remo API
 func (r *Remo) SendSignal(ctx context.Context) error {
 	if err := r.Client.SignalService.Send(ctx, r.Signal); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 
@@ -63,15 +63,15 @@ func (r *Remo) SendSignal(ctx context.Context) error {
 // SendSignalByAplSig is function to send signal by appliance and signal
 func (r *Remo) SendSignalByAplSig(apl, sig string, ctx context.Context) error {
 	if err := r.GetAppliance(ctx, apl); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	if err := r.GetSignal(r.Appliance.Signals, sig); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	if err := r.SendSignal(ctx); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	return nil
